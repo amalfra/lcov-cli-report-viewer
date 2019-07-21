@@ -1,0 +1,25 @@
+{
+  "name": "lcov-cli-report-viewer",
+  "version": "0.0.1",
+  "description": "A tool to generate CLI reports from lcov code coverage format file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amalfra/lcov-cli-report-viewer.git"
+  },
+  "keywords": [
+    "cli",
+    "lcov",
+    "report",
+    "view"
+  ],
+  "author": "Amal Francis <amalfra@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/amalfra/lcov-cli-report-viewer/issues"
+  },
+  "homepage": "https://github.com/amalfra/lcov-cli-report-viewer"
+}
