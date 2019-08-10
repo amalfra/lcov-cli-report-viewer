@@ -4,6 +4,7 @@
   "description": "A tool to generate CLI reports from lcov code coverage format file",
   "main": "index.js",
   "scripts": {
+    "pretest": "eslint --ignore-path .gitignore .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
@@ -28,5 +29,9 @@
   "dependencies": {
     "commander": "^3.0.0",
     "lcov-parse": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-strongloop": "^2.1.0"
   }
 }
