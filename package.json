@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "A tool to generate CLI reports from lcov code coverage format file",
   "main": "index.js",
+  "engines": {
+    "node": ">=10.12.0"
+  },
   "scripts": {
     "pretest": "eslint --ignore-path .gitignore .",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -32,6 +35,7 @@
   },
   "devDependencies": {
     "eslint": "^6.1.0",
-    "eslint-config-strongloop": "^2.1.0"
+    "eslint-config-strongloop": "^2.1.0",
+    "mocha": "^8.0.1"
   }
 }
