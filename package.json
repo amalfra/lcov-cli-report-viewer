@@ -30,8 +30,11 @@
   },
   "homepage": "https://github.com/amalfra/lcov-cli-report-viewer",
   "dependencies": {
+    "colorette": "^1.0.1",
+    "columnify": "^1.5.4",
     "commander": "^3.0.0",
-    "lcov-parse": "^1.0.0"
+    "lcov-parse": "^1.0.0",
+    "log-symbols": "^4.0.0"
   },
   "devDependencies": {
     "eslint": "^6.1.0",

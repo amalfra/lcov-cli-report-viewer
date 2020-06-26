@@ -6,6 +6,7 @@ const program = require('commander');
 var parse = require('lcov-parse');
 
 const packageJson = require('./package.json');
+const lib = require('./lib');
 
 program
   .version(packageJson.version, '-v, --version')
@@ -24,11 +25,14 @@ if (!fs.existsSync(filepath)) {
   process.exit(1);
 }
 
-parse(filepath, (err, data) => {
+parse(filepath, (err, results) => {
   if (err) {
     console.error('Failed to parse lcov file');
     process.exit(1);
   }
 
-  console.log(data);
+  results.forEach(r => {
+    console.log(lib.generateReport(r));
+    console.log();
+  });
 });
