@@ -12,7 +12,7 @@ const getPercentageCoverage =
 
 const isGreen = p => p > 80;
 
-const isYellow = p => p > 30;
+const isYellow = p => !isGreen(p) && p > 30;
 
 const generatePercentageCoverage = (p) => {
   if (p > 0) {
@@ -72,4 +72,6 @@ exports.generateReport = (r) => {
 
 exports._private = {
   findPercentage,
+  isGreen,
+  isYellow,
 };
