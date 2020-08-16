@@ -5,7 +5,7 @@ const { red, green, yellow, bold } = require('colorette');
 const logSymbols = require('log-symbols');
 const { EOL } = require('os');
 
-const findPercentage = (a, b) => Math.round((a / b) * 100);
+const findPercentage = (a, b) => b > 0 ? Math.round((a / b) * 100) : 0;
 
 const getPercentageCoverage =
   (hit, found) => found > 0 ? findPercentage(hit, found) : -1;
@@ -68,4 +68,8 @@ exports.generateReport = (r) => {
   }
 
   return symbol + ' ' + bold(r.title || r.file) + EOL + columns;
+};
+
+exports._private = {
+  findPercentage,
 };
