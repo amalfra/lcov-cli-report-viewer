@@ -1,6 +1,7 @@
 'use strict';
 
 const assert = require('assert');
+const { green, yellow, red } = require('colorette');
 
 const lib = require('./lib');
 
@@ -44,6 +45,24 @@ describe('lib', () => {
 
     it('should false when > 30 and > 80', () => {
       assert.strictEqual(lib._private.isYellow(90), false);
+    });
+  });
+
+  describe('generatePercentageCoverage()', () => {
+    it('should generate correct result when zero passed', () => {
+      assert.strictEqual(lib._private.generatePercentageCoverage(0), '-');
+    });
+
+    it('should generate correct result is green', () => {
+      assert.strictEqual(lib._private.generatePercentageCoverage(85), green('85%'));
+    });
+
+    it('should generate correct result is yellow', () => {
+      assert.strictEqual(lib._private.generatePercentageCoverage(65), yellow('65%'));
+    });
+
+    it('should generate correct result is red', () => {
+      assert.strictEqual(lib._private.generatePercentageCoverage(20), red('20%'));
     });
   });
 });

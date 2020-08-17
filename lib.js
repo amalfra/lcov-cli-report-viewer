@@ -17,12 +17,12 @@ const isYellow = p => !isGreen(p) && p > 30;
 const generatePercentageCoverage = (p) => {
   if (p > 0) {
     if (isGreen(p)) {
-      return `${green(p)}%`;
+      return green(`${p}%`);
     }
     if (isYellow(p)) {
-      return `${yellow(p)}%`;
+      return yellow(`${p}%`);
     }
-    return `${red(p)}%`;
+    return red(`${p}%`);
   }
   return '-';
 };
@@ -74,4 +74,5 @@ exports._private = {
   findPercentage,
   isGreen,
   isYellow,
+  generatePercentageCoverage,
 };
