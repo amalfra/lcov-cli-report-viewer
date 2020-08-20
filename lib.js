@@ -27,6 +27,27 @@ const generatePercentageCoverage = (p) => {
   return '-';
 };
 
+const generateFileReport = (title, file, linesPercentageConverage,
+  functionsPercentageConverage, branchesPercentageConverage) => {
+  let symbol = logSymbols.error;
+
+  if (isGreen(linesPercentageConverage) && isGreen(functionsPercentageConverage) &&
+    isGreen(branchesPercentageConverage)) {
+    symbol = logSymbols.success;
+  } else if ((linesPercentageConverage > 0 && isYellow(linesPercentageConverage) &&
+    functionsPercentageConverage > 0 && isYellow(functionsPercentageConverage)) ||
+    (functionsPercentageConverage > 0 && isYellow(functionsPercentageConverage) &&
+    branchesPercentageConverage > 0 && isYellow(branchesPercentageConverage)) ||
+    (functionsPercentageConverage > 0 && isYellow(functionsPercentageConverage) &&
+    linesPercentageConverage > 0 && isYellow(linesPercentageConverage)) ||
+    (linesPercentageConverage > 0 && isYellow(linesPercentageConverage) &&
+    branchesPercentageConverage > 0 && isYellow(branchesPercentageConverage))) {
+    symbol = logSymbols.warning;
+  }
+
+  return symbol + ' ' + bold(title || file);
+};
+
 exports.generateReport = (r) => {
   const linesPercentageConverage = getPercentageCoverage(r.lines.hit, r.lines.found);
   const functionsPercentageConverage = getPercentageCoverage(r.functions.hit, r.functions.found);
@@ -53,21 +74,8 @@ exports.generateReport = (r) => {
     showHeaders: false,
   });
 
-  let symbol = logSymbols.error;
-
-  if (isGreen(linesPercentageConverage) && isGreen(functionsPercentageConverage) &&
-    isGreen(branchesPercentageConverage)) {
-    symbol = logSymbols.success;
-  } else if ((linesPercentageConverage > 0 && isYellow(linesPercentageConverage) &&
-    functionsPercentageConverage > 0 && isYellow(functionsPercentageConverage)) ||
-    (functionsPercentageConverage > 0 && isYellow(functionsPercentageConverage) &&
-    branchesPercentageConverage > 0 && isYellow(branchesPercentageConverage)) ||
-    (functionsPercentageConverage > 0 && isYellow(functionsPercentageConverage) &&
-    linesPercentageConverage > 0 && isYellow(linesPercentageConverage))) {
-    symbol = logSymbols.warning;
-  }
-
-  return symbol + ' ' + bold(r.title || r.file) + EOL + columns;
+  return generateFileReport(r.title, r.file, linesPercentageConverage,
+    functionsPercentageConverage, branchesPercentageConverage) + EOL + columns;
 };
 
 exports._private = {
@@ -75,4 +83,5 @@ exports._private = {
   isGreen,
   isYellow,
   generatePercentageCoverage,
+  generateFileReport,
 };

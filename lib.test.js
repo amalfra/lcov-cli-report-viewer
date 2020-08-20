@@ -1,7 +1,8 @@
 'use strict';
 
 const assert = require('assert');
-const { green, yellow, red } = require('colorette');
+const { green, yellow, red, bold } = require('colorette');
+const logSymbols = require('log-symbols');
 
 const lib = require('./lib');
 
@@ -63,6 +64,68 @@ describe('lib', () => {
 
     it('should generate correct result is red', () => {
       assert.strictEqual(lib._private.generatePercentageCoverage(20), red('20%'));
+    });
+  });
+
+  describe('generateFileReport()', () => {
+    it('generates when only title given', () => {
+      assert.strictEqual(lib._private.generateFileReport('testtitle', null, 20, 20, -1),
+        `${logSymbols.error} ${bold('testtitle')}`);
+    });
+
+    it('generates when only file given', () => {
+      assert.strictEqual(lib._private.generateFileReport(null, 'testfile', 20, 20, -1),
+        `${logSymbols.error} ${bold('testfile')}`);
+    });
+
+    it('generates when both title and file given', () => {
+      assert.strictEqual(lib._private.generateFileReport('testtitle', 'testfile', 20, 20, -1),
+        `${logSymbols.error} ${bold('testtitle')}`);
+    });
+
+    it('generates success symbol when all green', () => {
+      assert.strictEqual(lib._private.generateFileReport('testtitle', null, 85, 85, 90),
+        `${logSymbols.success} ${bold('testtitle')}`);
+    });
+
+    it('generates error symbol when all red', () => {
+      assert.strictEqual(lib._private.generateFileReport('testtitle', null, 20, 20, 20),
+        `${logSymbols.error} ${bold('testtitle')}`);
+    });
+
+    it('generates error symbol when linesPercentageConverage is yellow', () => {
+      assert.strictEqual(lib._private.generateFileReport('testtitle', null, 65, 85, 85),
+        `${logSymbols.error} ${bold('testtitle')}`);
+    });
+
+    it('generates error symbol when functionsPercentageConverage is yellow', () => {
+      assert.strictEqual(lib._private.generateFileReport('testtitle', null, 85, 65, 85),
+        `${logSymbols.error} ${bold('testtitle')}`);
+    });
+
+    it('generates error symbol when branchesPercentageConverage is yellow', () => {
+      assert.strictEqual(lib._private.generateFileReport('testtitle', null, 85, 85, 65),
+        `${logSymbols.error} ${bold('testtitle')}`);
+    });
+
+    it('generates warning symbol when linesPercentageConverage and functionsPercentageConverage is yellow', () => {
+      assert.strictEqual(lib._private.generateFileReport('testtitle', null, 65, 65, 65),
+        `${logSymbols.warning} ${bold('testtitle')}`);
+    });
+
+    it('generates warning symbol when functionsPercentageConverage and branchesPercentageConverage is yellow', () => {
+      assert.strictEqual(lib._private.generateFileReport('testtitle', null, 85, 65, 65),
+        `${logSymbols.warning} ${bold('testtitle')}`);
+    });
+
+    it('generates warning symbol when linesPercentageConverage and branchesPercentageConverage is yellow', () => {
+      assert.strictEqual(lib._private.generateFileReport('testtitle', null, 65, 85, 65),
+        `${logSymbols.warning} ${bold('testtitle')}`);
+    });
+
+    it('generates warning symbol when linesPercentageConverage and functionsPercentageConverage is yellow', () => {
+      assert.strictEqual(lib._private.generateFileReport('testtitle', null, 65, 65, 85),
+        `${logSymbols.warning} ${bold('testtitle')}`);
     });
   });
 });
