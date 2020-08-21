@@ -128,4 +128,77 @@ describe('lib', () => {
         `${logSymbols.warning} ${bold('testtitle')}`);
     });
   });
+
+  describe('generateFileContentReport()', () => {
+    const rs = [
+      {
+        lines: {
+          hit: 20,
+          found: 100,
+        },
+        functions: {
+          hit: 20,
+          found: 100,
+        },
+        branches: {
+          hit: 20,
+          found: 100,
+        },
+      },
+      {
+        lines: {
+          hit: 60,
+          found: 100,
+        },
+        functions: {
+          hit: 60,
+          found: 100,
+        },
+        branches: {
+          hit: 20,
+          found: 100,
+        },
+      },
+      {
+        lines: {
+          hit: 80,
+          found: 100,
+        },
+        functions: {
+          hit: 60,
+          found: 100,
+        },
+        branches: {
+          hit: 80,
+          found: 100,
+        },
+      },
+    ];
+    const ps = [
+      [10, 20, 60],
+      [50, 60, 80],
+      [60, 85, 85],
+    ];
+
+    rs.forEach((r, i) => {
+      const percentages = ps[i];
+
+      it(`should false when lines.hit = ${r.lines.hit}, functions.hit =
+        ${r.functions.hit} & branches.hit = ${r.branches.hit}`, () => {
+        const lineResult = [
+          `> Lines:     ${r.lines.hit}/${r.lines.found} ${lib._private
+            .generatePercentageCoverage(percentages[0])}`,
+          `> Functions: ${r.functions.hit}/${r.functions.found} ${lib._private
+            .generatePercentageCoverage(percentages[1])}`,
+          `> Branches:  ${r.branches.hit}/${r.branches.found} ${lib._private
+            .generatePercentageCoverage(percentages[2])}`,
+        ];
+
+        const respLines = lib._private.generateFileContentReport(r, ...percentages).split('\n');
+        respLines.forEach((l, i) => {
+          assert.strictEqual(l, lineResult[i]);
+        });
+      });
+    });
+  });
 });

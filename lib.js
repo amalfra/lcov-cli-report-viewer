@@ -48,11 +48,8 @@ const generateFileReport = (title, file, linesPercentageConverage,
   return symbol + ' ' + bold(title || file);
 };
 
-exports.generateReport = (r) => {
-  const linesPercentageConverage = getPercentageCoverage(r.lines.hit, r.lines.found);
-  const functionsPercentageConverage = getPercentageCoverage(r.functions.hit, r.functions.found);
-  const branchesPercentageConverage = getPercentageCoverage(r.branches.hit, r.branches.found);
-
+const generateFileContentReport = (r, linesPercentageConverage,
+  functionsPercentageConverage, branchesPercentageConverage) => {
   const data = [
     {
       label: '> Lines:',
@@ -70,12 +67,21 @@ exports.generateReport = (r) => {
       percentage: generatePercentageCoverage(branchesPercentageConverage),
     },
   ];
-  const columns = columnify(data, {
+
+  return columnify(data, {
     showHeaders: false,
   });
+};
+
+exports.generateReport = (r) => {
+  const linesPercentageConverage = getPercentageCoverage(r.lines.hit, r.lines.found);
+  const functionsPercentageConverage = getPercentageCoverage(r.functions.hit, r.functions.found);
+  const branchesPercentageConverage = getPercentageCoverage(r.branches.hit, r.branches.found);
 
   return generateFileReport(r.title, r.file, linesPercentageConverage,
-    functionsPercentageConverage, branchesPercentageConverage) + EOL + columns;
+    functionsPercentageConverage, branchesPercentageConverage) + EOL +
+    generateFileContentReport(r, linesPercentageConverage, functionsPercentageConverage,
+      branchesPercentageConverage);
 };
 
 exports._private = {
@@ -84,4 +90,5 @@ exports._private = {
   isYellow,
   generatePercentageCoverage,
   generateFileReport,
+  generateFileContentReport,
 };
