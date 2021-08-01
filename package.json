@@ -4,7 +4,7 @@
   "description": "A tool to generate CLI reports from lcov code coverage format file",
   "main": "index.js",
   "engines": {
-    "npm": ">=7.20.3",
+    "npm": ">=7.19.1",
     "node": ">=12.22.4"
   },
   "scripts": {
