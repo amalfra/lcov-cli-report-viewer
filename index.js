@@ -1,12 +1,14 @@
 #!/usr/bin/env node
-'use strict';
 
-const fs = require('fs');
-const program = require('commander');
-var parse = require('lcov-parse');
+import fs from 'fs';
+import { createRequire } from 'module';
+import { program } from 'commander';
+import parse from 'lcov-parse';
 
+import * as lib from './lib.js';
+
+const require = createRequire(import.meta.url);
 const packageJson = require('./package.json');
-const lib = require('./lib');
 
 program
   .version(packageJson.version, '-v, --version')

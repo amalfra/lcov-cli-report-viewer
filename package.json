@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A tool to generate CLI reports from lcov code coverage format file",
   "main": "index.js",
+  "type": "module",
   "engines": {
     "npm": ">=7.19.1",
     "node": ">=12.22.4"

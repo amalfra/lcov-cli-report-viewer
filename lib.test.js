@@ -1,10 +1,8 @@
-'use strict';
+import assert from 'assert';
+import { red, green, yellow, bold } from 'colorette';
+import logSymbols from 'log-symbols';
 
-const assert = require('assert');
-const { green, yellow, red, bold } = require('colorette');
-const logSymbols = require('log-symbols');
-
-const lib = require('./lib');
+import * as lib from './lib.js';
 
 describe('lib', () => {
   describe('findPercentage()', () => {

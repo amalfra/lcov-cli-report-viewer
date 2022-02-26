@@ -1,9 +1,7 @@
-'use strict';
-
-const columnify = require('columnify');
-const { red, green, yellow, bold } = require('colorette');
-const logSymbols = require('log-symbols');
-const { EOL } = require('os');
+import { EOL } from 'os';
+import logSymbols from 'log-symbols';
+import { red, green, yellow, bold } from 'colorette';
+import columnify from 'columnify';
 
 const findPercentage = (a, b) => b > 0 ? Math.round((a / b) * 100) : 0;
 
@@ -73,7 +71,7 @@ const generateFileContentReport = (r, linesPercentageConverage,
   });
 };
 
-exports.generateReport = (r) => {
+export const generateReport = (r) => {
   const linesPercentageConverage = getPercentageCoverage(r.lines.hit, r.lines.found);
   const functionsPercentageConverage = getPercentageCoverage(r.functions.hit, r.functions.found);
   const branchesPercentageConverage = getPercentageCoverage(r.branches.hit, r.branches.found);
@@ -84,7 +82,7 @@ exports.generateReport = (r) => {
       branchesPercentageConverage);
 };
 
-exports._private = {
+export const _private = {
   findPercentage,
   isGreen,
   isYellow,
