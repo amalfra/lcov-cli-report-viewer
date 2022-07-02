@@ -199,4 +199,32 @@ describe('lib', () => {
       });
     });
   });
+
+  describe('generateReport()', () => {
+    const r = {
+      lines: {
+        found: 6,
+        hit: 5,
+        details: [[Object], [Object], [Object], [Object], [Object], [Object]],
+      },
+      functions: { hit: 2, found: 2, details: [ [Object], [Object] ] },
+      branches: { hit: 0, found: 0, details: [] },
+      title: 'Test 1',
+      file: 'javascript/common.js',
+    };
+
+    it('does not generate when pattern is not matched', () => {
+      const options = {
+        filterPath: 'src/modules/*',
+      };
+      assert.strictEqual(lib._private.generateReport(r, options), undefined);
+    });
+
+    it('generate when pattern is matched', () => {
+      const options = {
+        filterPath: 'javascript/*',
+      };
+      assert.notStrictEqual(lib._private.generateReport(r, options), undefined);
+    });
+  });
 });

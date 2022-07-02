@@ -4,7 +4,6 @@ import fs from 'fs';
 import { createRequire } from 'module';
 import { program } from 'commander';
 import parse from 'lcov-parse';
-import minimatch from 'minimatch';
 
 import * as lib from './lib.js';
 
@@ -37,11 +36,7 @@ parse(filepath, (err, results) => {
 
   const options = program.opts();
   results.forEach(r => {
-    if (options.filterPath && !minimatch(r.file, options.filterPath)) {
-      return;
-    }
-
-    console.log(lib.generateReport(r));
+    console.log(lib.generateReport(r, options));
     console.log();
   });
 });

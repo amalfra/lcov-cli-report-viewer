@@ -2,6 +2,7 @@ import { EOL } from 'os';
 import logSymbols from 'log-symbols';
 import { red, green, yellow, bold } from 'colorette';
 import columnify from 'columnify';
+import minimatch from 'minimatch';
 
 const findPercentage = (a, b) => b > 0 ? Math.round((a / b) * 100) : 0;
 
@@ -71,7 +72,11 @@ const generateFileContentReport = (r, linesPercentageConverage,
   });
 };
 
-export const generateReport = (r) => {
+export const generateReport = (r, filters = {}) => {
+  if (filters.filterPath && !minimatch(r.file, filters.filterPath)) {
+    return;
+  }
+
   const linesPercentageConverage = getPercentageCoverage(r.lines.hit, r.lines.found);
   const functionsPercentageConverage = getPercentageCoverage(r.functions.hit, r.functions.found);
   const branchesPercentageConverage = getPercentageCoverage(r.branches.hit, r.branches.found);
@@ -89,4 +94,5 @@ export const _private = {
   generatePercentageCoverage,
   generateFileReport,
   generateFileContentReport,
+  generateReport,
 };
