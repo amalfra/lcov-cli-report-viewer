@@ -4,6 +4,7 @@ import fs from 'fs';
 import { createRequire } from 'module';
 import { program } from 'commander';
 import parse from 'lcov-parse';
+import minimatch from 'minimatch';
 
 import * as lib from './lib.js';
 
@@ -12,7 +13,8 @@ const packageJson = require('./package.json');
 
 program
   .version(packageJson.version, '-v, --version')
-  .usage('<lcov.info file path...>');
+  .usage('<lcov.info file path...>')
+  .option('-fp, --filter-path <char>');
 
 program.parse(process.argv);
 
@@ -33,7 +35,12 @@ parse(filepath, (err, results) => {
     process.exit(1);
   }
 
+  const options = program.opts();
   results.forEach(r => {
+    if (options.filterPath && !minimatch(r.file, options.filterPath)) {
+      return;
+    }
+
     console.log(lib.generateReport(r));
     console.log();
   });
