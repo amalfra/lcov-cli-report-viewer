@@ -27,6 +27,13 @@ This can be used to show only file matching provided path pattern
 lcov-cli-report-viewer --filter-path "src/modules/handlers/*" /Users/amal/reports/info.lcov 
 ```
 
+* --skip-full-covered-files / -sfcf
+
+This can be used to skip files that have full coverage(100% lines, functions and branches)
+```sh
+lcov-cli-report-viewer --skip-full-covered-files /Users/amal/reports/info.lcov 
+```
+
 ## Development
 Questions, problems or suggestions? Please post them on the [issue tracker](https://github.com/amalfra/lcov-cli-report-viewer/issues).
 
