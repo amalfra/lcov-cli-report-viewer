@@ -19,6 +19,13 @@ Pass the path to lcov format file as commandline argument to **lcov-cli-report-v
 ```sh
 lcov-cli-report-viewer /Users/amal/reports/info.lcov
 ```
+#### Options supported
+* --filter-path / -fp
+
+This can be used to show only file matching provided path pattern
+```sh
+lcov-cli-report-viewer --filter-path "src/modules/handlers/*" /Users/amal/reports/info.lcov 
+```
 
 ## Development
 Questions, problems or suggestions? Please post them on the [issue tracker](https://github.com/amalfra/lcov-cli-report-viewer/issues).
