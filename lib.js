@@ -81,6 +81,11 @@ export const generateReport = (r, filters = {}) => {
   const functionsPercentageConverage = getPercentageCoverage(r.functions.hit, r.functions.found);
   const branchesPercentageConverage = getPercentageCoverage(r.branches.hit, r.branches.found);
 
+  if (filters.skipFullCoveredFiles && (linesPercentageConverage === 100 &&
+    functionsPercentageConverage === 100 && branchesPercentageConverage === 100)) {
+    return;
+  }
+
   return generateFileReport(r.title, r.file, linesPercentageConverage,
     functionsPercentageConverage, branchesPercentageConverage) + EOL +
     generateFileContentReport(r, linesPercentageConverage, functionsPercentageConverage,

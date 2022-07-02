@@ -13,7 +13,8 @@ const packageJson = require('./package.json');
 program
   .version(packageJson.version, '-v, --version')
   .usage('<lcov.info file path...>')
-  .option('-fp, --filter-path <char>');
+  .option('-fp, --filter-path <char>')
+  .option('-sfcf, --skip-full-covered-files');
 
 program.parse(process.argv);
 
@@ -36,7 +37,10 @@ parse(filepath, (err, results) => {
 
   const options = program.opts();
   results.forEach(r => {
-    console.log(lib.generateReport(r, options));
-    console.log();
+    const out = lib.generateReport(r, options);
+    if (out) {
+      console.log(out);
+      console.log();
+    }
   });
 });
