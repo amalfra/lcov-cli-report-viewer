@@ -10,7 +10,7 @@
   },
   "scripts": {
     "pretest": "eslint --ignore-path .gitignore .",
-    "test": "mocha ./*.test.js"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --coverage ./*.test.js"
   },
   "bin": {
     "lcov-cli-report-viewer": "./index.js"
@@ -42,6 +42,6 @@
   "devDependencies": {
     "eslint": "^8.19.0",
     "eslint-config-strongloop": "^2.1.0",
-    "mocha": "^10.0.0"
+    "jest": "^30.3.0"
   }
 }
