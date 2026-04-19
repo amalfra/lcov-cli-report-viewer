@@ -2,6 +2,7 @@ Lcov CLI report viewer
 ========
 [![npm version](https://badge.fury.io/js/lcov-cli-report-viewer.svg)](https://badge.fury.io/js/lcov-cli-report-viewer)
 ![Build Status](https://github.com/amalfra/lcov-cli-report-viewer/actions/workflows/test.yml/badge.svg?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/amalfra/lcov-cli-report-viewer/badge.svg?branch=main)](https://coveralls.io/github/amalfra/lcov-cli-report-viewer?branch=main)
 
 Lcov CLI report viewer is a commandline tool to generate CLI reports from lcov format file. It generates a pretty report from provided lcov file as shown below.
 
